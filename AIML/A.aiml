@@ -1,0 +1,8 @@
+<aiml version="1.0.1">
+
+    <category>
+        <pattern>Hello world!</pattern>
+        <template>Hello world!</template>
+    </category>
+
+</aiml>

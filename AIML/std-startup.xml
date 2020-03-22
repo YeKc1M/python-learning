@@ -1,0 +1,10 @@
+<aiml version="1.0.1" encoding="utf-8">
+
+    <category>
+        <pattern>LOAD AIML A</pattern>
+        <template>
+            <learn>A.aiml</learn>
+        </template>
+    </category>
+
+</aiml>
