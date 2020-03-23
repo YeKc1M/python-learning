@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask.helpers import url_for
+from werkzeug.utils import secure_filename
+
 app=Flask(__name__)
 
 @app.route('/')
@@ -34,6 +36,14 @@ def login():
         else:
             error='Invalid username and password GET'
     return render_template('login.html', error=error)
+
+# upload file
+@app.route('/upload', methods=['POST','GET'])
+def upload():
+    if request.method=='POST':
+        f=request.files['profile']
+        f.save('E:/'+secure_filename(f.filename))
+    return render_template('upload.html')
 
 # url_for(func_name, args)
 @app.route('/try_url/')
