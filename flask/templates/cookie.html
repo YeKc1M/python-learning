@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>cookie</title>
+        <script>
+            function setCookie(){
+                var key=document.getElementById("cookie_key").value;
+                var value=document.getElementById("cookie_value").value;
+                var d=new Date();
+                d.setTime(d.getTime()+7*24*60*60*1000);
+                var expires="expires="+d.toGMTString();
+                document.cookie=key+"="+value;
+                document.cookie=expires;
+                document.getElementById("cookie_content").innerHTML=document.cookie;
+            }
+            function getCookie(key){
+                var ca=document.cookie.split(";");
+                for(var i=0;i<ca.length;i++){
+                    var c=ca[i].trim();
+                    if(c.indexOf(key)==0){
+                        return c.substring(name.length,c.length);
+                    }
+                }
+                return "";
+            }
+            function showCookie(){
+                alert(document.cookie)
+            }
+            function clearCookie(){
+                alert("clear cookie")
+                document.cookie="name=name"+";expires=Mon, 23 Mar 2020 1:00:00 UTC";
+                document.getElementById("cookie_content").innerHTML=document.cookie;
+            }
+        </script>
+    </header>
+    <body>
+        <p id="cookie_content"></p>
+        <script>
+            document.getElementById("cookie_content").innerHTML=document.cookie;
+        </script>
+        <input type="text" id="cookie_key"/>
+        <input type="text" id="cookie_value"/>
+        <button onclick="setCookie()">set cookie</button><br>
+        <button onclick="showCookie()">show cookie</button>
+        <button onclick="clearCookie()">clear name cookie</button>
+    </body>
+</html>

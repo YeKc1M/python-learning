@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, make_response
 from flask.helpers import url_for
 from werkzeug.utils import secure_filename
+import datetime
 
 app=Flask(__name__)
 
@@ -44,6 +45,32 @@ def upload():
         f=request.files['profile']
         f.save('E:/'+secure_filename(f.filename))
     return render_template('upload.html')
+
+@app.route('/cookie')
+def cookie():
+    resp=make_response(render_template('cookie.html'))
+    print(request.cookies)
+    print(request.cookies.get('key'))
+    print(request.cookies.get('name'))
+    now=datetime.datetime.now()
+    week=''
+    if now.isoweekday()==1:
+        week='Mon'
+    elif now.isoweekday()==2:
+        week='Tue'
+    elif now.isoweekday()==3:
+        week='Wed'
+    elif now.isoweekday()==4:
+        week='Thur'
+    elif now.isoweekday()==5:
+        week='Fri'
+    elif now.isoweekday()==6:
+        week='Sat'
+    else:
+        week='Sun'
+    resp.set_cookie('last_access_time',datetime.datetime.strftime(now,'%Y-%m-%d %H:%m:%S'))
+    # resp.set_cookie('expires', week+', '+datetime.datetime.strftime(now, '%d '))
+    return resp
 
 # url_for(func_name, args)
 @app.route('/try_url/')
