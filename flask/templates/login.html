@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
     <head>
         <title>login</title>
@@ -20,4 +20,18 @@
             <input type="submit" value="Submit"/>
         </form>
     </body>
-</html>
+</html>-->
+
+{% extends "layout.html" %}
+{% block body %}
+    <h1>Login</h1>
+    {% if error %}
+    <p>Error: {{error}}</p>
+    {% endif %}
+    <p>post from</p>
+        <form method="POST" action="login">
+            username: <input type="text" name="username" value="{{request.form.username}}"/>
+            password: <input type="password" name="password"/>
+            <input type="submit" value="Submit"/>
+        </form>
+{% endblock %}

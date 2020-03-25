@@ -1,18 +1,14 @@
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, redirect, make_response, flash
 from flask.helpers import url_for
 from werkzeug.utils import secure_filename
 import datetime
 
 app=Flask(__name__)
+app.secret_key=b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/')
 def index():
-    return '''<head>
-        <title>index</title>
-    </head>
-    <body>
-        <h1>this is index</h1>
-    </body>'''
+    return render_template('index.html')
 
 @app.route('/hello/')
 @app.route('/hello/<name>')
@@ -26,16 +22,11 @@ def login():
         username=request.form['username']
         password=request.form['password']
         if(username=='mky' and password=='123'):
-            return render_template('hello.html', name=username)
+            #return render_template('hello.html', name=username)
+            flash("successful login")
+            return redirect(url_for('index'))
         else:
-            error='Invalid username and password POST'
-    elif request.method=='GET':
-        username=request.args.get('username')
-        password=request.args.get('password')
-        if(username=='mky' and password=='123'):
-            return render_template('hello.html', name=username)
-        else:
-            error='Invalid username and password GET'
+            error='Invalid login'
     return render_template('login.html', error=error)
 
 # upload file
