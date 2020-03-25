@@ -24,6 +24,7 @@ def login():
         if(username=='mky' and password=='123'):
             #return render_template('hello.html', name=username)
             flash("successful login")
+            flash("flash 2")
             return redirect(url_for('index'))
         else:
             error='Invalid login'
