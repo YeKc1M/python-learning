@@ -1,5 +1,14 @@
 {% extends "layout.html" %}
+<script>
+    function logout(){
+        alert('logout')
+        document.cookie="username=username;expires=Mon, 23 Mar 2020 1:00:00 UTC"
+        document.cookie="password=password;expires=Mon, 23 Mar 2020 1:00:00 UTC"
+        window.location.href="http://127.0.0.1/login"
+    }
+</script>
 {% block body %}
     <h1>Index</h1>
     <p>Do you want to <a href="{{ url_for('login') }}">login in</a>?</p>
+    <a href="{{url_for('login')}}" onclick="logout()">log out</a>
 {% endblock %}

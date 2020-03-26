@@ -6,6 +6,51 @@ import datetime
 app=Flask(__name__)
 app.secret_key=b'_5#y2L"F4Q8z\n\xec]/'
 
+def getGMTTime(time):
+    week=''
+    if time.isoweekday()==1:
+        week='Mon'
+    elif time.isoweekday()==2:
+        week='Tue'
+    elif time.isoweekday()==3:
+        week='Wed'
+    elif time.isoweekday()==4:
+        week='Thur'
+    elif time.isoweekday()==5:
+        week='Fri'
+    elif time.isoweekday()==6:
+        week='Sat'
+    else:
+        week='Sun'
+    month=''
+    m=time.month
+    if m==1:
+        month='Jan'
+    elif m==2:
+        month='Feb'
+    elif m==3:
+        month='Mar'
+    elif m==4:
+        month='Apr'
+    elif m==5:
+        month='May'
+    elif m==6:
+        month='Jun'
+    elif m==7:
+        month='Jul'
+    elif m==8:
+        month='Aug'
+    elif m==9:
+        month='Sep'
+    elif m==10:
+        month='Oct'
+    elif m==11:
+        month='Nov'
+    else:
+        month='Dec'
+    # resp.set_cookie('expires', week+', '+datetime.datetime.strftime(now, '%d '))expires=Mon, 23 Mar 2020 1:00:00 UTC
+    return week+', '+str(time.day)+" "+month+datetime.datetime.strftime(time, " %Y %H:%m:%S UTC")
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -19,15 +64,27 @@ def hello(name=None):
 def login():
     error=None
     if request.method=='POST':
+        # if request.cookies.get('username')=='mky' and request.cookies.get('password')=='123':
+        #     return redirect(url_for('index'))
         username=request.form['username']
         password=request.form['password']
         if(username=='mky' and password=='123'):
             #return render_template('hello.html', name=username)
+            auto_log=request.form.get('auto_login')
+            if auto_log:
+                resp=make_response(render_template('index.html'))
+                resp.set_cookie('username', username)
+                resp.set_cookie('password', password)
+                resp.set_cookie('expires', getGMTTime(datetime.datetime.now()))
+                return resp
             flash("successful login")
             flash("flash 2")
             return redirect(url_for('index'))
         else:
             error='Invalid login'
+    elif request.method=='GET':
+        if request.cookies.get('username')=='mky' and request.cookies.get('password')=='123':
+            return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
 # upload file

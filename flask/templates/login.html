@@ -30,8 +30,9 @@
     {% endif %}
     <p>post from</p>
         <form method="POST" action="login">
-            username: <input type="text" name="username" value="{{request.form.username}}"/>
-            password: <input type="password" name="password"/>
+            username: <input type="text" name="username" value="{{request.form.username}}"/><br>
+            password: <input type="password" name="password"/><br>
+            <input type="checkbox" name="auto_login"/>auto login<br>
             <input type="submit" value="Submit"/>
         </form>
 {% endblock %}
