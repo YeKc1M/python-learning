@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, make_response, flash
+from flask import Flask, render_template, request, redirect, make_response, flash, jsonify
 from flask.helpers import url_for
 from werkzeug.utils import secure_filename
 import datetime
@@ -125,6 +125,22 @@ def cookie():
 @app.route('/try_url/')
 def try_url():
     return '''url_for'''
+
+# ajax learning
+@app.route('/ajax')
+def ajax():
+    return render_template('ajax.html')
+
+@app.route('/add_numbers')
+def add_numbers():
+    a=request.args.get('a', 0, type=int)
+    b=request.args.get('b', 0, type=int)
+    return jsonify(result=a+b)
+    # return jsonify({'name':'mky','sid':'213171900'})
+@app.route('/ajax_text')
+def ajax_text():
+    text=request.args.get('text', type=str)+' back'
+    return jsonify(result=text)
 
 if __name__=='__main__':
     app.run(debug=True)

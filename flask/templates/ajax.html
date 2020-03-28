@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ajax</title>
+    </head>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script type="text/javascript">
+        $SCRIPT_ROOT={{ request.script_root|tojson|safe }};
+    </script>
+    <script>
+        $(function(){
+            $('a#calculate').bind('click', function(){
+                $.getJSON($SCRIPT_ROOT+'/add_numbers', {
+                    a: $('input[name="a"]').val(),
+                    b: $('input[name="b"]').val()
+                }, function(data){
+                    $("#result").text(data.result);
+                });
+                return false;
+            });
+        })
+        $(function(){
+            $('input#input_text').bind('keyup', function(){
+                $.getJSON($SCRIPT_ROOT+'/ajax_text', {
+                    text: $('input[name="ajax_text"]').val()
+                }, function(data){
+                    $('#ajax_text').text(data.result);
+                });
+                return false;
+            })
+        })
+    </script>
+    <body>
+        <h1>calculate</h1>
+        <p>
+            <input type="text" size="5" name="a"> + 
+            <input type="text" size="5" name="b"> = 
+            <span id="result">?</span>
+            <a href=# id=calculate>calculate</a>
+        </p>
+        <input type="text" name="ajax_text" id="input_text">
+        <p id="ajax_text">ajax text</p>
+    </body>
+</html>
