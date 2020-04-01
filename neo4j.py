@@ -1,4 +1,5 @@
 from py2neo import Graph, Node, Relationship, RelationshipMatcher, NodeMatcher, RelationshipMatch, NodeMatch
+import py2neo.ogm
 
 uri='bolt://localhost:7687'
 
@@ -16,10 +17,10 @@ def testNodeMatcher():
    results=matcher.match('Person')# type NodeMatch. unknown error if add properties
    # print(result)
    for result in results:
-      print(result) # type Node
+      print(result['name']) # type Node
    olders=results.where('_.age=20')
    for older in olders:
-      print(older)
+      print(older['name']+str(older['age']))
 
 def testNodeMatch():
    graph=Graph(host='localhost', user='neo4j', password='password')
@@ -34,14 +35,23 @@ def testRelationshipMatch():
    results=match.where("_.status='now'")
    print(results)
    for i in results:
-      print(type(i))
+      print(type(i))# type Relation
+      print(i['status'])
 
 def testRelationshipMatcher():
    graph=Graph(host='localhost', user='neo4j', password='password')
    matcher=RelationshipMatcher(graph)
    results=matcher.match(None, 'LiveIn') # type RelationshipMatch
    for result in results:
-      print(type(result))
+      print(type(result))# type Relation
+      print(result['status'])
+
+def test():
+   graph=Graph(host='localhost', user='neo4j', password='password')
+   matcher=NodeMatcher(graph)
+   results=matcher.match('Person')
+   l=list(results)
+   print(l[0]['name'])
 
 if __name__=='__main__':
    graph=Graph(host='localhost', user='neo4j', password='password')
@@ -50,5 +60,6 @@ if __name__=='__main__':
 #    graph.create(node)
    #testNodeMatcher()
    #testNodeMatch()
-   testRelationshipMatch()
+   #testRelationshipMatch()
    #testRelationshipMatcher()
+   #test()
