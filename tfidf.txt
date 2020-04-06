@@ -48,8 +48,8 @@ adjust search terms if neccessary
 open xsearch in incident record
 review list of recommended articles
 adjust search terms if needed
-xsearch
-ism
+search using xsearch across various repositories for knowledge articles and records
+search using ism across various repositories for knowledge articles and records
 open ism from incident
 review list of recommended articles
 adjust search terms
@@ -74,7 +74,7 @@ navigate to major incident
 fill out all mandatory fields
 open incident linked to the new major incident
 search for existing major incident with same reported issue
-open incident linke to existing major incident identified in step a
+open incident linked to existing major incident identified in step a
 check that incident is a child incient of major incident
 pause investigation
 resume investigation
