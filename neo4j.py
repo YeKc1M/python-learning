@@ -53,6 +53,13 @@ def test():
    l=list(results)
    print(l[0]['name'])
 
+def tfidf():
+   graph=Graph(host='localhost', user='neo4j', password='password')
+   rs=graph.run('match(n) return id(n) as id, n.name as name').data()
+   with open('tfidf.txt','w', encoding='utf-8') as f:
+      for r in rs:
+         f.write(r['name']+'\n')
+
 if __name__=='__main__':
    graph=Graph(host='localhost', user='neo4j', password='password')
    # create node
@@ -63,3 +70,4 @@ if __name__=='__main__':
    #testRelationshipMatch()
    #testRelationshipMatcher()
    #test()
+   tfidf()

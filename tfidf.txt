@@ -1,0 +1,80 @@
+investigate and diagnose
+log a incident
+categorize a incident
+incident management
+create a incident
+via case
+via incident module
+via event module
+navigate to case record to create new incident record
+navigate to incident list
+fill in mandatory fields and save record
+add attachments
+save the incient
+navigate to incident module
+fill in the mandatory fileds in the incident
+add attachments
+save the incident
+available soon
+validate all incident information
+create service request
+special handling notes
+check special handling notes in the pop-up window
+check special handling notes in the special handling notes tab
+priority
+component
+eudp restriction
+attachment
+check the priority
+read initial description and validate
+check component and prepare information
+adjust the component
+check whether correct component chosen
+incident processor decide, document and choose
+manually change component to reassign incident
+click save to update record
+go to attachment tab, click the file name to open attachment details
+click document redirect url to open attachment
+explore knowledge sources
+access customer system
+involve addtional expertise
+bundle incident to major incident
+pause and resume investigation
+search within now or agent intelligence system for records with similar issue
+search using xsearch / ISM across various repositories for knowledge articles and records
+open agent intelligence in incident record
+review recommended records based on current incident subject
+adjust search terms if neccessary
+open xsearch in incident record
+review list of recommended articles
+adjust search terms if needed
+xsearch
+ism
+open ism from incident
+review list of recommended articles
+adjust search terms
+view full article
+access cloud access manager in details area
+perform investigation in the customer system
+next processing level works in incident
+next processing level not work in incident sent to problem processor
+spc handover to operations
+create problem record
+fill in relevant information in new record
+save the record
+continue working in incident
+navigate to assignment group in details
+fill in message field
+save the record
+incident record changes
+incident processing resumes
+bundle with new major incident
+bundle with existing major incident
+navigate to major incident
+fill out all mandatory fields
+open incident linked to the new major incident
+search for existing major incident with same reported issue
+open incident linke to existing major incident identified in step a
+check that incident is a child incient of major incident
+pause investigation
+resume investigation
