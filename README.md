@@ -8,6 +8,8 @@ neo4j.py python connect to neo4j
 
 flask flask web
 
+tfidf calculate text similarity
+
 SAP cai 调用SAP cai接口获得智能机器人的问答
 web script
 ```
