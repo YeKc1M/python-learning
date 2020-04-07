@@ -1,4 +1,5 @@
 import nltk
+from gensim import corpora, models, similarities
 
 names=[]
 with open('tfidf.txt','r') as f:
@@ -8,7 +9,7 @@ with open('tfidf.txt','r') as f:
 names.pop()
 # print(names)
 # print(len(names))
-stopwords=[',','/']
+stopwords=[',','/','the']
 
 # tokenize
 tokens_list=[]
@@ -35,12 +36,27 @@ for tokens in tokens_list:
     cleaned_tokens_list.append(cleaned_tokens)
 # print(cleaned_tokens_list)
 
-# count frequency
-frequency={}
+dic=corpora.Dictionary(cleaned_tokens_list) # all tokens
+# print(dic)
+# print(dic.token2id) # token-id mapping
+
+cleaned_documents=[]
 for cleaned_tokens in cleaned_tokens_list:
-    for cleaned_token in cleaned_tokens:
-        if frequency.get(cleaned_token)==None:
-            frequency[cleaned_token]=1
-        else:
-            frequency[cleaned_token]+=1
-#print(frequency)
+    cleaned_documents.append(' '.join(cleaned_tokens))
+# print(cleaned_documents)
+
+# vec=dic.doc2bow('explore knowledge source option a'.split(' ')) # vectorize
+# print(vec)
+
+bow_corpus=[dic.doc2bow(text) for text in cleaned_tokens_list]
+tfidf=models.TfidfModel(bow_corpus)
+# print(tfidf[dic.doc2bow('explore knowledge source step 1'.split(' '))])
+
+index=similarities.SparseMatrixSimilarity(tfidf[bow_corpus], num_features=145)
+
+query='explore knowledge sources step 1'.split(' ')
+query_bow=dic.doc2bow(query)
+sims=index[tfidf[query_bow]]
+
+for document_number, score in sorted(enumerate(sims), key=lambda x: x[1], reverse=True):
+    print(document_number, score)
