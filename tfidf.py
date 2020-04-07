@@ -37,12 +37,13 @@ for tokens in tokens_list:
 # print(cleaned_tokens_list)
 
 dic=corpora.Dictionary(cleaned_tokens_list) # all tokens
+# print(len(dic))
 # print(dic)
 # print(dic.token2id) # token-id mapping
 
-cleaned_documents=[]
-for cleaned_tokens in cleaned_tokens_list:
-    cleaned_documents.append(' '.join(cleaned_tokens))
+# cleaned_documents=[]
+# for cleaned_tokens in cleaned_tokens_list:
+#     cleaned_documents.append(' '.join(cleaned_tokens))
 # print(cleaned_documents)
 
 # vec=dic.doc2bow('explore knowledge source option a'.split(' ')) # vectorize
@@ -52,11 +53,13 @@ bow_corpus=[dic.doc2bow(text) for text in cleaned_tokens_list]
 tfidf=models.TfidfModel(bow_corpus)
 # print(tfidf[dic.doc2bow('explore knowledge source step 1'.split(' '))])
 
-index=similarities.SparseMatrixSimilarity(tfidf[bow_corpus], num_features=145)
+index=similarities.SparseMatrixSimilarity(tfidf[bow_corpus], num_features=len(dic))
 
 query='explore knowledge sources step 1'.split(' ')
 query_bow=dic.doc2bow(query)
 sims=index[tfidf[query_bow]]
+# print(list(enumerate(sims)))
 
+# calculate similarity
 for document_number, score in sorted(enumerate(sims), key=lambda x: x[1], reverse=True):
     print(document_number, score)
